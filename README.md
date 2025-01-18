@@ -63,21 +63,6 @@ You can launch dyneqtra-dev using pre-built docker images in the following steps
 Set up is completed. Click on "New Spur" to create a workflow, or start with one of the stock templates.
 
 
-5. **[Optional] Manage your LLM provider keys from the app:**
-
-   Once dyneqtra-dev app is running you can manage your LLM provider keys through the portal:
-
-   <img width="1913" alt="image" src="https://github.com/user-attachments/assets/32fe79f1-f518-4df5-859c-1d1c0fc0570e" />
-
-   Select API keys tab
-
-   <img width="441" alt="image" src="https://github.com/user-attachments/assets/cccc7e27-c10b-4f3a-b818-3b65c55f4170" />
-
-   Enter your provider's key and click save (save button will appear after you add/modify a key)
-
-   <img width="451" alt="image" src="https://github.com/user-attachments/assets/e35ba2bb-4c60-4b13-9a8d-cc47cac45375" />
-
-
 # 🛠️ dyneqtra-dev Development Setup
 #### [ Instructions for development on Unix-like systems. Development on Windows/PC not tested ]
 
