@@ -1,0 +1,34 @@
+dataset_name: https://openaipublic.blob.core.windows.net/simple-evals/math_test.csv
+
+preamble: |
+  Solve the following math problem step by step. The last line of your response should be of the form Answer: $ANSWER (without quotes) where $ANSWER is the answer to the problem.\n\n  Remember to put your answer on its own line after "Answer:", and you do not need to use a \boxed command.
+
+doc_to_text: |
+  {{ Question }}
+
+doc_to_target: |
+  {{ Answer }}
+
+ground_truth_answer_extraction:
+  functions:
+    - find_number
+    - maybe_remove_comma
+  regexes:
+    - "(?i)Answer\\s*:\\s*([^\n]+)"
+
+predicted_answer_extraction:
+  functions:
+    - find_number
+    - maybe_remove_comma
+  regexes:
+    - "(?i)Answer\\s*:\\s*([^\n]+)"
+
+evaluation:
+  method: math
+
+metadata:
+  name: "Math"
+  description: "Math is a dataset of 1000+ math word problems with answers."
+  type: "Reasoning"
+  num_samples: 1000
+  paper_link: "https://example.com/original-paper"

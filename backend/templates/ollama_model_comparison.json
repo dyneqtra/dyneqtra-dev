@@ -1,0 +1,128 @@
+{
+  "name": "Ollama Model Comparison",
+  "metadata": {
+    "name": "Ollama Model Comparison",
+    "description": "Compare the performance of different Ollama models. Make sure you have Ollama installed and running.",
+    "features": ["Llama 3.2", "Gemma 2", "Mistral v0.3"]
+  },
+  "definition": {
+    "nodes": [
+      {
+        "id": "input_prompt",
+        "title": "input_prompt",
+        "node_type": "InputNode",
+        "config": {
+          "output_schema": {
+            "input_1": "str"
+          },
+          "enforce_schema": false,
+          "title": "input_prompt"
+        },
+        "coordinates": {
+          "x": 0,
+          "y": 35
+        },
+        "subworkflow": null
+      },
+      {
+        "id": "Llama3_2",
+        "title": "Llama3_2",
+        "node_type": "SingleLLMCallNode",
+        "config": {
+          "title": "Llama3_2",
+          "type": "object",
+          "output_schema": {
+            "output": "str"
+          },
+          "llm_info": {
+            "model": "ollama/llama3.2",
+            "max_tokens": 16384,
+            "temperature": 0.7,
+            "top_p": 1
+          },
+          "system_message": "You are a helpful assistant.",
+          "user_message": "<p>{{input_prompt.input_1}}</p>",
+          "few_shot_examples": null
+        },
+        "coordinates": {
+          "x": 438,
+          "y": 0
+        },
+        "subworkflow": null
+      },
+      {
+        "id": "Gemma2",
+        "title": "Gemma2",
+        "node_type": "SingleLLMCallNode",
+        "config": {
+          "title": "Gemma2",
+          "type": "object",
+          "output_schema": {
+            "output": "str"
+          },
+          "llm_info": {
+            "model": "ollama/gemma2",
+            "max_tokens": 16384,
+            "temperature": 0.7,
+            "top_p": 1
+          },
+          "system_message": "You are a helpful assistant.",
+          "user_message": "<p>{{input_prompt.input_1}}</p>",
+          "few_shot_examples": null
+        },
+        "coordinates": {
+          "x": 438,
+          "y": 369
+        },
+        "subworkflow": null
+      },
+      {
+        "id": "Mistral_03",
+        "title": "Mistral_03",
+        "node_type": "SingleLLMCallNode",
+        "config": {
+          "title": "Mistral_03",
+          "type": "object",
+          "output_schema": {
+            "output": "str"
+          },
+          "llm_info": {
+            "model": "ollama/mistral",
+            "max_tokens": 16384,
+            "temperature": 0.7,
+            "top_p": 1
+          },
+          "system_message": "You are a helpful assistant.",
+          "user_message": "<p>{{input_prompt.input_1}}</p>",
+          "few_shot_examples": null
+        },
+        "coordinates": {
+          "x": 438,
+          "y": 738
+        },
+        "subworkflow": null
+      }
+    ],
+    "links": [
+      {
+        "source_id": "input_prompt",
+        "target_id": "Llama3_2"
+      },
+      {
+        "source_id": "input_prompt",
+        "target_id": "Gemma2"
+      },
+      {
+        "source_id": "input_prompt",
+        "target_id": "Mistral_03"
+      }
+    ],
+    "test_inputs": [
+      {
+        "id": 1734714471358,
+        "input_1": "Make a joke about peanuts."
+      }
+    ]
+  },
+  "description": ""
+}

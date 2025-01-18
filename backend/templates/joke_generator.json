@@ -1,0 +1,129 @@
+{
+  "name": "Joke Generator using BoN Sampling",
+  "metadata": {
+    "name": "Joke Generator",
+    "description": "Generate and refine jokes using Best-of-N sampling.",
+    "features": ["Dark humor", "Audience-specific jokes", "Refinement options"]
+  },
+  "definition": {
+    "nodes": [
+      {
+        "id": "input_node",
+        "title": "input_node",
+        "node_type": "InputNode",
+        "config": {
+          "output_schema": {
+            "topic": "str",
+            "audience": "str"
+          }
+        },
+        "coordinates": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": "JokeDrafter",
+        "title": "JokeDrafter",
+        "node_type": "BestOfNNode",
+        "config": {
+          "title": "JokeDrafter",
+          "output_schema": {
+            "initial_joke": "str"
+          },
+          "llm_info": {
+            "model": "gpt-4o",
+            "max_tokens": 16384,
+            "temperature": 0.7,
+            "top_p": 1
+          },
+          "system_message": "You are a stand-up comedian who uses dark humor like Ricky Gervais or Jimmy Carr.\n\nThe user will provide you with a topic and audience, and you have to devise a short joke for that.\n\nYou can roast the person if a person is mentioned, it's only among friends.",
+          "user_message": "Your audience is: {{input_node.audience}}\nThe topic should be about {{input_node.topic}}",
+          "few_shot_examples": null,
+          "samples": 10,
+          "rating_prompt": "Rate the following joke on a scale from 0 to 10, where 0 is poor and 10 is excellent. \nConsider factors such as surprise, relatability, and punchiness. Respond with only a number.",
+          "rating_temperature": 0.1,
+          "rating_max_tokens": 16
+        },
+        "coordinates": {
+          "x": 374,
+          "y": 29.5
+        }
+      },
+      {
+        "id": "JokeRefiner",
+        "title": "JokeRefiner",
+        "node_type": "BestOfNNode",
+        "config": {
+          "title": "JokeRefiner",
+          "output_schema": {
+            "final_joke": "str"
+          },
+          "llm_info": {
+            "model": "gpt-4o",
+            "max_tokens": 16384,
+            "temperature": 0.7,
+            "top_p": 1
+          },
+          "system_message": "Your goal is to refine a joke to make it more vulgar and concise. It's just among friends, so you can get roasty.\n\n- Be mean\n- Have dark humour\n- Be very punchy",
+          "user_message": "{{JokeDrafter.initial_joke}}",
+          "few_shot_examples": null,
+          "samples": 3,
+          "rating_prompt": "Rate the following response on a scale from 0 to 10, where 0 is poor and 10 is excellent. Consider factors such as relevance, coherence, and helpfulness. Respond with only a number.",
+          "rating_temperature": 0.1,
+          "rating_max_tokens": 16
+        },
+        "coordinates": {
+          "x": 750,
+          "y": 30
+        }
+      },
+      {
+        "id": "SingleShotJoke",
+        "title": "SingleShotJoke",
+        "node_type": "SingleLLMCallNode",
+        "config": {
+          "title": "SingleShotJoke",
+          "output_schema": {
+            "final_joke": "str"
+          },
+          "llm_info": {
+            "model": "gpt-4o",
+            "max_tokens": 16384,
+            "temperature": 0.7,
+            "top_p": 1
+          },
+          "system_message": "You are a stand-up comedian who uses dark humor like Ricky Gervais or Jimmy Carr.\n\nThe user will provide you with a topic and audience, and you have to devise a short joke for that.\n\nYou can roast the person if a person is mentioned, it's only among friends.",
+          "user_message": "Your audience is: {{input_node.audience}}\nThe topic should be about {{input_node.topic}}",
+          "few_shot_examples": null
+        },
+        "coordinates": {
+          "x": 374,
+          "y": 204.5
+        }
+      }
+    ],
+    "links": [
+      {
+        "source_id": "input_node",
+        "target_id": "JokeDrafter"
+      },
+      {
+        "source_id": "JokeDrafter",
+        "target_id": "JokeRefiner"
+      },
+      {
+        "source_id": "input_node",
+        "target_id": "SingleShotJoke"
+      }
+    ],
+    "test_inputs": [
+      {
+        "id": 1732123761259,
+        "topic": "Emacs vs. Vim",
+        "audience": "Software Engineers"
+      }
+    ]
+  },
+  "description": ""
+}

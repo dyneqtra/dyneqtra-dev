@@ -1,0 +1,105 @@
+{
+	"name": "PySpur Development",
+
+	"dockerComposeFile": [
+		"./docker-compose.yml"
+	],
+
+	"service": "devdocker",
+
+    "runServices": ["devdocker"],
+
+	"workspaceFolder": "/pyspur",
+
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"version": "latest",
+			"moby": true
+		}
+	},
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "github.copilot",
+                "github.copilot-chat",
+                // Backend extensions
+                "ms-python.python",
+                "ms-python.black-formatter",
+                "ms-python.pylance",
+                "ms-python.vscode-pylance",
+                // Frontend extensions
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "ms-vscode.vscode-typescript-next"
+            ],
+            "settings": {
+                "python.analysis.autoImportCompletions": true,
+                "python.analysis.autoImportUserSymbols": true,
+                "python.analysis.importFormat": "relative",
+                "python.analysis.importSortEnabled": true,
+                "python.analysis.importSortOrder": ["stdlib", "thirdparty", "local"],
+                "python.analysis.typeCheckingMode": "strict",
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "typescript.tsdk": "/pyspur/frontend/node_modules/typescript/lib",
+                "typescript.preferences.importModuleSpecifier": "non-relative",
+                "typescript.preferences.projectRoot": "/pyspur/frontend",
+                "npm.packageManager": "npm",
+
+                // Language specific editor settings
+                "[python]": {
+                    "editor.formatOnType": true,
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "ms-python.black-formatter"
+                },
+                "[json]": {
+                    "editor.quickSuggestions": {
+                        "strings": true
+                    },
+                    "editor.suggest.insertMode": "replace",
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "esbenp.prettier-vscode"
+                },
+                "[shellscript]": {
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "esbenp.prettier-vscode"
+                },
+                "[typescriptreact]": {
+                    "editor.defaultFormatter": "esbenp.prettier-vscode",
+                    "editor.formatOnSave": true
+                },
+                "[typescript]": {
+                    "editor.defaultFormatter": "esbenp.prettier-vscode",
+                    "editor.formatOnSave": true
+                },
+                "[yaml]": {
+                    "editor.insertSpaces": true,
+                    "editor.tabSize": 2,
+                    "editor.autoIndent": "advanced",
+                    "diffEditor.ignoreTrimWhitespace": false,
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "esbenp.prettier-vscode"
+                },
+                "prettier.configPath": "/pyspur/frontend/.prettierrc"
+            }
+        }
+    },
+    "remoteUser": "root",
+    "shutdownAction": "none",
+	"forwardPorts": [6080, "backend:8000", "frontend:3000"],
+    "portsAttributes": {
+        "frontend:3000" :{
+            "label": "frontend",
+            "onAutoForward": "silent"
+        },
+        "backend:8000" :{
+            "label": "backend",
+            "onAutoForward": "silent"
+        },
+        "6080" :{
+            "label": "app",
+            "onAutoForward": "silent"
+        }
+    },
+    "postCreateCommand": "chmod +x .devcontainer/post-create.sh && .devcontainer/post-create.sh"
+}

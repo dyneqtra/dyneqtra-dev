@@ -1,0 +1,4 @@
+# ignore the test database file
+test.db
+/app/integrations/google/token.json
+data/

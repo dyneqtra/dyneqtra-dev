@@ -1,0 +1,14 @@
+services:
+  devdocker:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      target: development
+    volumes:
+      # Project files
+      - ../:/pyspur:cached
+      - ../.env:/pyspur/backend/.env:cached
+      - /pyspur/frontend/node_modules
+    environment:
+      - PYTHONPATH=/pyspur/backend
+    command: sleep infinity

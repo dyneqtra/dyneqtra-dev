@@ -1,0 +1,24 @@
+dataset_name: 'https://openaipublic.blob.core.windows.net/simple-evals/gpqa_diamond.csv'
+dataset_split: None  # Not needed since we're loading from a CSV
+dataset_subsets: None
+
+process_docs: !function gpqa.process_docs
+
+preamble: |
+  Answer the following multiple choice question. The last line of your response should be of the following format: 'Answer: $LETTER' (without quotes) where LETTER is one of ABCD, nothing else. Think step by step before answering.
+doc_to_text: "What is the correct answer to this question:{{Question}}\nChoices:\n(A) {{choice1}}\n(B) {{choice2}}\n(C) {{choice3}}\n(D) {{choice4}}\nAnswer:"
+doc_to_target: "{{answer}}"
+
+predicted_answer_extraction:
+  regexes:
+    - "(?i)Answer\\s*:\\s*([A-D])"
+
+evaluation:
+  method: mcq
+
+metadata:
+  name: "GPQA"
+  description: "Google-Proof Questions Answering"
+  type: "Reasoning"
+  num_samples: 1000
+  paper_link: "https://arxiv.org/abs/2305.17100"
