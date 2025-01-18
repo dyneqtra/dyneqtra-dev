@@ -10,6 +10,8 @@
 <a href="./README_ES.md"><img alt="Versión en español del README" src="https://img.shields.io/badge/Español-blue"></a>
 </p>
 
+![Banner](https://i.ibb.co/2WfkJs6/1-FED9459-96-D3-4134-85-AF-4-D733-D7-FB182.png)
+
 
 # 🕸️ Why dyneqtra-dev?
 
