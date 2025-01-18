@@ -1,4 +1,4 @@
-# dyneqtra-dev - Graph-Based Editor for LLM Workflows
+  # dyneqtra-dev - Graph-Based Editor for LLM Workflows
 
 <p align="center">
   <a href="./README.md"><img alt="README in English" src="https://img.shields.io/badge/English-blue"></a>
@@ -10,7 +10,7 @@
 <a href="./README_ES.md"><img alt="Versión en español del README" src="https://img.shields.io/badge/Español-blue"></a>
 </p>
 
-![Banner](https://i.ibb.co/2WfkJs6/1-FED9459-96-D3-4134-85-AF-4-D733-D7-FB182.png?v=1)
+![Banner](https://raw.githubusercontent.com/sowravhasan/brand-shop/main/A3955FBC-3A6A-4034-A9C4-B5E8A32D973D.png)
 
 
 # 🕸️ Why dyneqtra-dev?
